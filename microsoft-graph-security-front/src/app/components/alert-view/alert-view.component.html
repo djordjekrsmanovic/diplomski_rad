@@ -1,0 +1,37 @@
+<div class="alert-details" *ngIf="dataLoaded">
+
+  <app-alert-details [id]=alert.id [date]=alert.createDateTime [assignedTo]=alert.assignedTo [category]=alert.category
+    [status]=alert.status [severity]=alert.severity [vendor]=alert.vendorInformation.vendor
+    [provider]=alert.vendorInformation.provider [subprovider]=alert.vendorInformation.subProvider></app-alert-details>
+
+  <div class="gap">
+
+  </div>
+  <article class="message is-primary">
+    <div class="message-header">
+      <p>Description</p>
+
+    </div>
+    <div class="message-body">
+      {{alert.alertDescription}}
+    </div>
+  </article>
+
+  <article class="message is-danger">
+    <div class="message-header">
+      <p>Recomended Actions</p>
+
+    </div>
+    <div class="message-body">
+
+      <ol>
+        <li *ngFor="let action of alert.recommendedActions">{{action}}</li>
+      </ol>
+      
+
+
+    </div>
+  </article>
+
+
+</div>

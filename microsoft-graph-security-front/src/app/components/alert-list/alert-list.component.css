@@ -1,0 +1,35 @@
+.filters{
+    margin: 20px;
+}
+
+.filter-content{
+    overflow: auto;
+    height: 80vh;
+}
+
+.filter-content::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* Track */
+.filter-content::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 2px rgb(15, 145, 197); 
+    border-radius: 10px;
+}
+
+/* Handle */
+.filter-content::-webkit-scrollbar-thumb {
+    background: rgb(15, 145, 197); 
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+.filter-content::-webkit-scrollbar-thumb:hover {
+    background: #009eb3; 
+}
+
+.alerts{
+    margin-top: 50px;
+    margin-left: 20px;
+    margin-bottom: 100px;
+}

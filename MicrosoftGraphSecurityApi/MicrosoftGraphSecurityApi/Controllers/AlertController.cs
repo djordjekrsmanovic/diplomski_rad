@@ -26,30 +26,39 @@ namespace MicrosoftGraphSecurityApi.Controllers
 
         private readonly IModelMapper<Alert, AlertTableDto> alertToAlertTableDtoMapper;
 
-        private readonly IGraphRequestService graphRequestService;
+        private readonly IModelMapper<Alert, AlertDetailsDto> alertToAlertDetailsDtoMapper;
 
-        public AlertController(IGraphRequestService graphRequestService,IModelMapper<Alert,AlertTableDto> mapper)
+        private readonly IAlertService alertService;
+
+        public AlertController(IAlertService alertService,IModelMapper<Alert,AlertTableDto> mapper,IModelMapper<Alert,AlertDetailsDto> alertMapper)
         {
-            this.graphRequestService = graphRequestService;
+            this.alertService = alertService;
             this.alertToAlertTableDtoMapper = mapper;
+            this.alertToAlertDetailsDtoMapper = alertMapper;
         }
         
 
         [HttpGet]
-        public async Task<List<AlertTableDto>> GetAlerts(string content = "")
+        [Route("/alerts")]
+        public async Task<List<AlertTableDto>> GetAlerts()
         {
 
-            String json = await graphRequestService.CreateRequest("alerts/");
+            List<Alert> alerts = alertService.getAlerts().Result;
 
-            int n=json.IndexOf('[');
-
-            String jsonAlertsArray = json.Substring(n, json.Length-n-1);
-
-            var deptList = JsonConvert.DeserializeObject<List<Alert>>(jsonAlertsArray);
-
-            List<AlertTableDto> alertTableDtos = alertToAlertTableDtoMapper.ToDtoList(deptList);
+            List<AlertTableDto> alertTableDtos = alertToAlertTableDtoMapper.ToDtoList(alerts);
 
             return alertTableDtos;
+        }
+
+        [HttpGet]
+        [Route("/alerts/{alertId}")]
+        public async Task<AlertDetailsDto> GetAlert(String alertId)
+        {
+            Alert alert = alertService.getAlert(alertId).Result;
+
+            AlertDetailsDto alertDetailsDto = alertToAlertDetailsDtoMapper.ToDto(alert);
+
+            return alertDetailsDto;
         }
     }
 }

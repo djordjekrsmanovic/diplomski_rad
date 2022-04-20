@@ -1,0 +1,244 @@
+<div class="alerts">
+    <div class="content is-medium">
+        <div class="columns">
+            <div class="column is-three-quarters">
+                <h1 class="title">Alerts</h1>
+                <hr />
+    
+                <table class="table is-striped">
+                    <thead>
+                        <tr>
+                            
+                            <th><abbr title="Title">Title</abbr></th>
+                            <th><abbr title="Sevarity">Servarity</abbr></th>
+                            <th><abbr title="Status">Status</abbr></th>
+                            <th><abbr title="Category">Category</abbr></th>
+                            <th><abbr title="Created Date">Created Date</abbr></th>
+                            <!-- <th><abbr title="Assigned To">Assigned To</abbr></th> -->
+                            <th><abbr title="Provider">Provider</abbr></th>
+    
+                        </tr>
+                    </thead>
+    
+                    <tbody>
+                        <tr *ngFor="let alert of alerts" (click)="rowClicked(alert)">
+                        
+                        <td>{{alert.title}}</td>
+                        <td>{{alert.severity}}</td>
+                        <td>{{alert.status}}</td>
+                        <td>{{alert.category}}</td>
+                        <td>{{alert.createDateTime}}</td>
+                        <!-- <td>{{alert.assignedTo}}</td> -->
+                        <td>{{alert.provider}}</td>
+                        </tr>
+                    </tbody>
+    
+    
+                </table>
+            </div>
+            <div class="column auto" style="margin-left: 5px; background-color: rgb(203, 210, 219);">
+                <div>
+                    <h3>Filters</h3>
+                </div>
+                <hr />
+                <div class="filter-content">
+                    <div class="filters">
+                        <div class="columns">
+                            <div class="column">
+                                Top
+                            </div>
+                            <div class="column">
+                                <input class="input is-info" type="text" placeholder="Insert number of visible alerts">
+                            </div>
+                            
+                        </div>
+                        <hr />
+                        <div class="columns">
+                            <div class="column">
+                                <b>Severity</b>
+                            </div>
+                            
+                            
+                        </div>
+                        <div class="columns">
+                            <div class="column">
+                                <label class="checkbox">
+                                    <input type="checkbox">
+                                    Any
+                                </label>
+                            </div>
+                            
+                        </div>
+                        <div class="columns">
+                            <div class="column">
+                                <label class="checkbox">
+                                    <input type="checkbox">
+                                    High
+                                </label>
+                            </div>
+                            
+                        </div>
+        
+                        <div class="columns">
+                            <div class="column">
+                                <label class="checkbox">
+                                    <input type="checkbox">
+                                    Medium
+                                </label>
+                            </div>
+                            
+                        </div>
+        
+                        <div class="columns">
+                            <div class="column">
+                                <label class="checkbox">
+                                    <input type="checkbox">
+                                    Low
+                                </label>
+                            </div>
+                            
+                        </div>
+        
+                        <div class="columns">
+                            <div class="column">
+                                <label class="checkbox">
+                                    <input type="checkbox">
+                                    Informational
+                                </label>
+                            </div>
+                            
+                        </div>
+                        <hr/>
+        
+                        <div class="columns">
+                            <div class="column">
+                                <b>Status</b>
+                            </div>
+                            
+                            
+                        </div>
+                        <div class="columns">
+                            <div class="column">
+                                <label class="checkbox">
+                                    <input type="checkbox">
+                                    Any
+                                </label>
+                            </div>
+                            
+                        </div>
+                        <div class="columns">
+                            <div class="column">
+                                <label class="checkbox">
+                                    <input type="checkbox">
+                                    NewAlert
+                                </label>
+                            </div>
+                            
+                        </div>
+        
+                        <div class="columns">
+                            <div class="column">
+                                <label class="checkbox">
+                                    <input type="checkbox">
+                                    InProress
+                                </label>
+                            </div>
+                            
+                        </div>
+        
+                        <div class="columns">
+                            <div class="column">
+                                <label class="checkbox">
+                                    <input type="checkbox">
+                                    Resolved
+                                </label>
+                            </div>
+                            
+                        </div>
+        
+                        <div class="columns">
+                            <div class="column">
+                                <label class="checkbox">
+                                    <input type="checkbox">
+                                    Dismissed
+                                </label>
+                            </div>
+                            
+                        </div>
+                        <hr/>
+                        
+                        <div class="columns">
+                            <div class="column">
+                                <b>Severity</b>
+                            </div>
+                            
+                            
+                        </div>
+                        <div class="columns">
+                            <div class="column">
+                                <label class="checkbox">
+                                    <input type="checkbox">
+                                    Any
+                                </label>
+                            </div>
+                            
+                        </div>
+                        <div class="columns">
+                            <div class="column">
+                                <label class="checkbox">
+                                    <input type="checkbox">
+                                    High
+                                </label>
+                            </div>
+                            
+                        </div>
+        
+                        <div class="columns">
+                            <div class="column">
+                                <label class="checkbox">
+                                    <input type="checkbox">
+                                    Medium
+                                </label>
+                            </div>
+                            
+                        </div>
+        
+                        <div class="columns">
+                            <div class="column">
+                                <label class="checkbox">
+                                    <input type="checkbox">
+                                    Low
+                                </label>
+                            </div>
+                            
+                        </div>
+        
+                        <div class="columns">
+                            <div class="column">
+                                <label class="checkbox">
+                                    <input type="checkbox">
+                                    Informational
+                                </label>
+                            </div>
+                            
+                        </div>
+                        <hr/>
+                        <div class="columns">
+                            <div class="column">
+                                <button class="button is-info">Apply Filters</button>
+                            </div>
+                            <div class="column">
+                                <button class="button is-info is-light">Reset Filters</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                
+    
+            </div>
+        </div>
+    
+    </div>
+    <div>
+</div>

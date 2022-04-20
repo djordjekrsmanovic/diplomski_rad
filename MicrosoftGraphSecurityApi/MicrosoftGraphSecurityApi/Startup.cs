@@ -33,6 +33,13 @@ namespace MicrosoftGraphSecurityApi
         {
 
             services.AddControllers();
+            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            {
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MicrosoftGraphSecurityApi", Version = "v1" });
@@ -41,6 +48,9 @@ namespace MicrosoftGraphSecurityApi
             services.AddScoped<IAuthenticationProvider, AuthenticationWithAppPermission>();
             services.AddScoped<IModelMapper<Alert,AlertTableDto>, AlertToAlertTableDtoMapper>();
             services.AddScoped<IGraphRequestService, GraphRequestService>();
+            services.AddScoped<IAlertService, AlertService>();
+            services.AddScoped<IModelMapper<Microsoft.Graph.SecurityVendorInformation, VendorInfromationDto>, SecurityVendorInformationToDtoMapper>();
+            services.AddScoped<IModelMapper<Alert, AlertDetailsDto>, AlertToAlertDetailsDtoMapper>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,6 +64,8 @@ namespace MicrosoftGraphSecurityApi
             }
 
             app.UseHttpsRedirection();
+
+            app.UseCors("MyPolicy");
 
             app.UseRouting();
 

@@ -16,7 +16,7 @@ namespace MicrosoftGraphSecurityApi.Service
     {
         private readonly IAuthenticationProvider authenticationProvider;
 
-        private static readonly String urlBase = "https://graph.microsoft.com/beta/security/";
+        private static readonly String urlBase = "https://graph.microsoft.com/v1.0/security/";
 
         public GraphRequestService(IAuthenticationProvider authenticationProvider)
         {
