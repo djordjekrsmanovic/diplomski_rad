@@ -1,3 +1,4 @@
+<app-loader *ngIf="!dataLoaded"></app-loader>
 <div class="alert-details" *ngIf="dataLoaded">
 
   <app-alert-details [id]=alert.id [date]=alert.createDateTime [assignedTo]=alert.assignedTo [category]=alert.category

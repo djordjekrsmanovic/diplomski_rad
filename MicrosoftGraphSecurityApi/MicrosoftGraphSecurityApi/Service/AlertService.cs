@@ -27,7 +27,21 @@ namespace MicrosoftGraphSecurityApi.Service
 
         public async Task<List<Alert>> getAlerts()
         {
-            String json = await graphRequestService.CreateRequest("alerts");
+            String json = await graphRequestService.CreateRequest("alerts?$filter=(Status eq 'NewAlert') and (Severity eq 'High' or Severity eq 'Low')");
+
+            int n = json.IndexOf('[');
+
+            String jsonAlertsArray = json.Substring(n, json.Length - n - 1);
+
+            var alerts = JsonConvert.DeserializeObject<List<Alert>>(jsonAlertsArray);
+
+            return alerts;
+        }
+
+        public async Task<List<Alert>> FilterAlerts(AlertFilter filter)
+        {
+            String filterValues = filter.ConvertFilterToString();
+            String json = await graphRequestService.CreateRequest("alerts?"+filterValues);
 
             int n = json.IndexOf('[');
 

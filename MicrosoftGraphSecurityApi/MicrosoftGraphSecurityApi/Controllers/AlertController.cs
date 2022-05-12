@@ -30,11 +30,14 @@ namespace MicrosoftGraphSecurityApi.Controllers
 
         private readonly IAlertService alertService;
 
-        public AlertController(IAlertService alertService,IModelMapper<Alert,AlertTableDto> mapper,IModelMapper<Alert,AlertDetailsDto> alertMapper)
+        private readonly IModelMapper<AlertFilter, AlertFilterDto> alertFilterDtoToAlertFilterModel;
+
+        public AlertController(IAlertService alertService,IModelMapper<Alert,AlertTableDto> mapper,IModelMapper<Alert,AlertDetailsDto> alertMapper, IModelMapper<AlertFilter, AlertFilterDto> filterMapper)
         {
             this.alertService = alertService;
             this.alertToAlertTableDtoMapper = mapper;
             this.alertToAlertDetailsDtoMapper = alertMapper;
+            this.alertFilterDtoToAlertFilterModel = filterMapper;
         }
         
 
@@ -59,6 +62,18 @@ namespace MicrosoftGraphSecurityApi.Controllers
             AlertDetailsDto alertDetailsDto = alertToAlertDetailsDtoMapper.ToDto(alert);
 
             return alertDetailsDto;
+        }
+
+        [HttpPost]
+        [Route("/alerts/filter")]
+        public async Task<List<AlertTableDto>> GetAlert(AlertFilterDto dto)
+        {
+            AlertFilter alertFilter = alertFilterDtoToAlertFilterModel.ToModel(dto);
+            List<Alert> alerts = await alertService.FilterAlerts(alertFilter);
+
+            List<AlertTableDto> alertTableDtos = alertToAlertTableDtoMapper.ToDtoList(alerts);
+
+            return  alertTableDtos;
         }
     }
 }

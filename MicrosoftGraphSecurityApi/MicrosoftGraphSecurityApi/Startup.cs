@@ -51,6 +51,7 @@ namespace MicrosoftGraphSecurityApi
             services.AddScoped<IAlertService, AlertService>();
             services.AddScoped<IModelMapper<Microsoft.Graph.SecurityVendorInformation, VendorInfromationDto>, SecurityVendorInformationToDtoMapper>();
             services.AddScoped<IModelMapper<Alert, AlertDetailsDto>, AlertToAlertDetailsDtoMapper>();
+            services.AddScoped<IModelMapper<AlertFilter, AlertFilterDto>, FilterDtoToFilterModel>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

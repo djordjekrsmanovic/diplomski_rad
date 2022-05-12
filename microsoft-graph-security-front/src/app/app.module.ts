@@ -7,6 +7,7 @@ import { AlertViewComponent } from './components/alert-view/alert-view.component
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AlertDetailsComponent } from './components/alert-details/alert-details.component';
+import { LoaderComponent } from './components/loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { AlertDetailsComponent } from './components/alert-details/alert-details.
     AlertViewComponent,
     NavbarComponent,
     AlertDetailsComponent,
+    LoaderComponent,
     
   ],
   imports: [
