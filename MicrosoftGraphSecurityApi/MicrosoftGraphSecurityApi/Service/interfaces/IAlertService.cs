@@ -1,4 +1,5 @@
-﻿using MicrosoftGraphSecurityApi.Model;
+﻿using MicrosoftGraphSecurityApi.Dto;
+using MicrosoftGraphSecurityApi.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,5 +12,7 @@ namespace MicrosoftGraphSecurityApi.Service
         Task<List<Alert>> getAlerts();
         Task<Alert> getAlert(string alertId);
         Task<List<Alert>> FilterAlerts(AlertFilter filter);
+        Task<List<StatisticDto>> GetStatisticBySeverity();
+        Task<List<StatisticDto>> GetStatisticByStatus();
     }
 }

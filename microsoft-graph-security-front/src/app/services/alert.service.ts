@@ -5,6 +5,7 @@ import { environment } from "src/environments/environment";
 import { Alert } from "../model/Alert";
 import { AlertDetails } from "../model/AlertDetails";
 import { AlertFilter } from "../model/AlertFilter";
+import { AlertStatistic } from "../model/Statistic";
 
 
 
@@ -33,5 +34,14 @@ import { AlertFilter } from "../model/AlertFilter";
     filterAlerts(filter:AlertFilter){
       const url=this.serverUrl+'alerts/filter';
       return this.http.post<Alert[]>(url,filter);
+    }
+
+    getSeverityStatistic(){
+      const url=this.serverUrl+'alerts/statistic/severity';
+      return this.http.get<AlertStatistic[]>(url);
+    }
+    getStatusStatistic(){
+      const url=this.serverUrl+'alerts/statistic/status';
+      return this.http.get<AlertStatistic[]>(url);
     }
   }

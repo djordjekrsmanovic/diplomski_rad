@@ -9,6 +9,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { AlertDetailsComponent } from './components/alert-details/alert-details.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import { FormsModule } from '@angular/forms';
+import { HomeComponent } from './components/home/home.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -18,13 +21,15 @@ import { FormsModule } from '@angular/forms';
     NavbarComponent,
     AlertDetailsComponent,
     LoaderComponent,
-    
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgxChartsModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

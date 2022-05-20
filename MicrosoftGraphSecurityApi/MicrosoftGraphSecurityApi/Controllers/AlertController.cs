@@ -75,5 +75,21 @@ namespace MicrosoftGraphSecurityApi.Controllers
 
             return  alertTableDtos;
         }
+
+        [HttpGet]
+        [Route("/alerts/statistic/severity")]
+        public async Task<List<StatisticDto>> GetAlertStatisticsBySeverity()
+        {
+            List<StatisticDto> alertStatistic =await alertService.GetStatisticBySeverity();
+            return alertStatistic;
+        }
+
+        [HttpGet]
+        [Route("/alerts/statistic/status")]
+        public async Task<List<StatisticDto>> GetAlertStatisticsByStatus()
+        {
+            List<StatisticDto> alertStatistic = await alertService.GetStatisticByStatus();
+            return alertStatistic;
+        }
     }
 }
