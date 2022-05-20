@@ -23,49 +23,59 @@ namespace MicrosoftGraphSecurityApi.Model
 
             StringBuilder sb = new StringBuilder("");
             String topPart = "";
-            bool filterAppeared = false;
-            List<AlertFilterComponent> filterComponents;
-            ExtractTopFilter(ref topPart);
-
-            for (int i = 0; i < Filters.Keys.Count; i++)
+            String severityPart = "";
+            String statusPart = "";
+            List<AlertFilterComponent> severityfilterComponents;
+            List<AlertFilterComponent> statusFilterComponents;
+            if (Filters.TryGetValue(AlertFilterComponentType.SEVERITY, out severityfilterComponents) == true)
             {
+                severityPart = ExtractStringFromFilter(severityfilterComponents);
+            }
 
-                if (filterAppeared == false)
+            if (Filters.TryGetValue(AlertFilterComponentType.STATUS, out statusFilterComponents) == true)
+            {
+                statusPart = ExtractStringFromFilter(statusFilterComponents);
+            }
+            ExtractTopFilter(ref topPart);
+            if (severityPart!="" && statusPart != "")
+            {
+                sb.Append("$filter=");
+                sb.Append(severityPart);
+                sb.Append(" and ");
+                sb.Append(statusPart);
+            }
+            if ((severityPart=="" || statusPart == "") && (severityPart!="" || statusPart!=""))
+            {
+                sb.Append("$filter=");
+                sb.Append(severityPart);
+                sb.Append(statusPart);
+            }
+            sb.Append(topPart);
+            return sb.ToString();
+        }
+
+        private String ExtractStringFromFilter(List<AlertFilterComponent> filterComponents)
+        {
+            if (filterComponents.Count == 0)
+            {
+                return "";
+            }
+            StringBuilder sb = new StringBuilder("");
+            sb.Append("(");
+            sb.Append(AlertFilterComponentTypeToString(filterComponents.ElementAt(0).FilterType));
+            sb.Append(" ");
+            for (int j = 0; j < filterComponents.Count; j++)
+            {
+                sb.Append(" eq ");
+                sb.Append("'" + filterComponents[j].Value + "'");
+                if (j != filterComponents.Count - 1)
                 {
-                    filterAppeared = true;
-                    sb.Append("$filter=");
-
-                }
-
-                if (Filters.TryGetValue(Filters.ElementAt(i).Key, out filterComponents) == true)
-                {
-
-                    var filtersValues = Filters[Filters.ElementAt(i).Key];
-                    sb.Append("(");
-                    sb.Append(AlertFilterComponentTypeToString(Filters.ElementAt(i).Key));
-                    sb.Append(" ");
-                    for (int j = 0; j < filtersValues.Count; j++)
-                    {
-                        sb.Append(" eq ");
-                        sb.Append("'" + filtersValues[j].Value + "'");
-                        if (j != filtersValues.Count - 1)
-                        {
-                            sb.Append(" or ");
-                            sb.Append(AlertFilterComponentTypeToString(Filters.ElementAt(i).Key));
-                        }
-
-                    }
-                    sb.Append(" ) ");
-                }
-
-
-                if (i != Filters.Count - 1)
-                {
-                    sb.Append(" and ");
+                    sb.Append(" or ");
+                    sb.Append(AlertFilterComponentTypeToString(filterComponents.ElementAt(j).FilterType));
                 }
 
             }
-            sb.Append(topPart);
+            sb.Append(" ) ");
             return sb.ToString();
         }
 

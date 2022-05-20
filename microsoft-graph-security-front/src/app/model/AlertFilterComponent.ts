@@ -1,5 +1,5 @@
 
 export class AlertFilterComponent{
     public type:number;
-    public filterValues:string[];
+    public filterValues:(string|number)[];
 }

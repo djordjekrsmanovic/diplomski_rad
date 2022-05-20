@@ -4,6 +4,7 @@ import { Observable } from "rxjs";
 import { environment } from "src/environments/environment";
 import { Alert } from "../model/Alert";
 import { AlertDetails } from "../model/AlertDetails";
+import { AlertFilter } from "../model/AlertFilter";
 
 
 
@@ -27,5 +28,10 @@ import { AlertDetails } from "../model/AlertDetails";
     getAlert(id:string){
         const url=this.serverUrl+'alerts/'+id;
         return this.http.get<AlertDetails>(url);
+    }
+
+    filterAlerts(filter:AlertFilter){
+      const url=this.serverUrl+'alerts/filter';
+      return this.http.post<Alert[]>(url,filter);
     }
   }

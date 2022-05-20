@@ -12,65 +12,80 @@ import { AlertFilterComponent } from '../../model/AlertFilterComponent';
 })
 export class AlertListComponent implements OnInit {
 
-  constructor(private alertService:AlertService,private router:Router) { }
+  constructor(private alertService: AlertService, private router: Router) { }
 
-  alerts:Alert[]=[];
+  alerts: Alert[] = [];
 
-  dataLoaded:boolean=false;
+  filteredAlerts: Alert[] = []
 
-  severityFilterComponent:AlertFilterComponent={
-    type:0,
-    filterValues:[],
+  dataLoaded: boolean = false;
+
+  severityFilterComponent: AlertFilterComponent = {
+    type: 0,
+    filterValues: [],
   }
-  statusFilterComponent:AlertFilterComponent={
-    type:1,
-    filterValues:[],
+  statusFilterComponent: AlertFilterComponent = {
+    type: 1,
+    filterValues: [],
   }
-  topFilterComponent:AlertFilterComponent={
-    type:2,
-    filterValues:[],
+  topFilterComponent: AlertFilterComponent = {
+    type: 2,
+    filterValues: [],
   }
-  filter:AlertFilter={
-    filter:[]
+  filter: AlertFilter = {
+    filter: []
   };
 
+  alertCount: number = 0;
+
   ngOnInit(): void {
-    this.alertService.getAlerts().subscribe(data=>{this.alerts=data; this.dataLoaded=true;});
+    this.alertService.getAlerts().subscribe(data => { this.alerts = data; this.dataLoaded = true; this.filteredAlerts=this.alerts});
   }
 
-  rowClicked(alert:Alert){
+  rowClicked(alert: Alert) {
     console.log('clicked');
-    const url='/alert/'+alert.id;
+    const url = '/alert/' + alert.id;
     this.router.navigate([url]);
   }
 
-  addSeverity(severity:string){
-    if(this.severityFilterComponent.filterValues.find(x => x===severity)){      
-      this.severityFilterComponent.filterValues.forEach((el, index) => {if (el===severity){
-        this.severityFilterComponent.filterValues.splice(index,1)        
-      }})
+  addSeverity(severity: string) {
+    if (this.severityFilterComponent.filterValues.find(x => x === severity)) {
+      this.severityFilterComponent.filterValues.forEach((el, index) => {
+        if (el === severity) {
+          this.severityFilterComponent.filterValues.splice(index, 1)
+        }
+      })
       return;
-    }   
+    }
     this.severityFilterComponent.filterValues.push(severity)
   }
 
-  addStatus(status:string){
-    if(this.statusFilterComponent.filterValues.find(x => x===status)){      
-      this.statusFilterComponent.filterValues.forEach((el, index) => {if (el===status){
-        this.statusFilterComponent.filterValues.splice(index,1)        
-      }})
+  addStatus(status: string) {
+    if (this.statusFilterComponent.filterValues.find(x => x === status)) {
+      this.statusFilterComponent.filterValues.forEach((el, index) => {
+        if (el === status) {
+          this.statusFilterComponent.filterValues.splice(index, 1)
+        }
+      })
       return;
-    }   
+    }
     this.statusFilterComponent.filterValues.push(status)
   }
 
-  filterAlerts(){
-    this.filter.filter=[];
-    this.filter.filter.length=0;
+  filterAlerts() {
+    this.filter.filter = [];
+    this.filter.filter.length = 0;
+    if (this.alertCount > 0) {
+      this.topFilterComponent.filterValues.length=0;
+      this.topFilterComponent.filterValues=[];
+      this.topFilterComponent.filterValues.push(this.alertCount)
+    } else {
+      alert('Number of filters must be positive number')
+    }
     this.filter.filter.push(this.severityFilterComponent);
     this.filter.filter.push(this.statusFilterComponent);
     this.filter.filter.push(this.topFilterComponent);
-    console.log(this.filter);
+    this.alertService.filterAlerts(this.filter).subscribe((data)=>{this.alerts.length=0;this.alerts=[];this.alerts=data});
   }
 
 }
