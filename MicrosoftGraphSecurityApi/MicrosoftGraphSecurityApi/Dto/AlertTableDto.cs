@@ -13,7 +13,7 @@ namespace MicrosoftGraphSecurityApi.Dto
         public AlertSeverity Severity { get; set; }
         public AlertStatus Status { get; set; }
         public String Category { get; set; }
-        public DateTimeOffset CreateDateTime { get; set; }
+        public String CreateDateTime { get; set; }
         public String AssignedTo { get; set; }
         public String Provider { get; set; }
 

@@ -4,7 +4,7 @@
 
 .filter-content{
     overflow: auto;
-    height: 80vh;
+    height: 70vh;
 }
 
 .filter-content::-webkit-scrollbar {

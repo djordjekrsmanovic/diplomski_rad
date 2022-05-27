@@ -4,6 +4,7 @@ import { Alert } from 'src/app/model/Alert';
 import { AlertService } from 'src/app/services/alert.service';
 import { AlertFilter } from '../../model/AlertFilter';
 import { AlertFilterComponent } from '../../model/AlertFilterComponent';
+import {formatDate} from '@angular/common';
 
 @Component({
   selector: 'app-alert-list',
@@ -16,9 +17,11 @@ export class AlertListComponent implements OnInit {
 
   alerts: Alert[] = [];
 
-  filteredAlerts: Alert[] = []
+  
 
   dataLoaded: boolean = false;
+
+  filteringData:boolean=false;
 
   severityFilterComponent: AlertFilterComponent = {
     type: 0,
@@ -39,7 +42,12 @@ export class AlertListComponent implements OnInit {
   alertCount: number = 0;
 
   ngOnInit(): void {
-    this.alertService.getAlerts().subscribe(data => { this.alerts = data; this.dataLoaded = true; this.filteredAlerts=this.alerts});
+    this.alertService.getAlerts().subscribe(data => { this.alerts = data; 
+      this.dataLoaded = true; 
+      this.alerts.map((alert)=>{
+        
+      })
+      });
   }
 
   rowClicked(alert: Alert) {
@@ -73,6 +81,7 @@ export class AlertListComponent implements OnInit {
   }
 
   filterAlerts() {
+    
     this.filter.filter = [];
     this.filter.filter.length = 0;
     if (this.alertCount > 0) {
@@ -81,11 +90,13 @@ export class AlertListComponent implements OnInit {
       this.topFilterComponent.filterValues.push(this.alertCount)
     } else {
       alert('Number of filters must be positive number')
+      return;
     }
+    this.filteringData=true;
     this.filter.filter.push(this.severityFilterComponent);
     this.filter.filter.push(this.statusFilterComponent);
     this.filter.filter.push(this.topFilterComponent);
-    this.alertService.filterAlerts(this.filter).subscribe((data)=>{this.alerts.length=0;this.alerts=[];this.alerts=data});
+    this.alertService.filterAlerts(this.filter).subscribe((data)=>{this.alerts.length=0;this.alerts=[];this.alerts=data;this.filteringData=false;});
   }
 
 }

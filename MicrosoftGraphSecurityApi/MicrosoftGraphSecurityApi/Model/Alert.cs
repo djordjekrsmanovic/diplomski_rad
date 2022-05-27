@@ -41,5 +41,15 @@ namespace MicrosoftGraphSecurityApi.Model
         public List<UserSecurityState>? UserStates { get; set; }
         public SecurityVendorInformation? VendorInformation { get; set; }
         public List<VulnerabilityState>? VulnerabilityStates { get; set; }
+
+        public static DateTime ConvertFromDateTimeOffset(DateTimeOffset dateTime)
+        {
+            if (dateTime.Offset.Equals(TimeSpan.Zero))
+                return dateTime.UtcDateTime;
+            else if (dateTime.Offset.Equals(TimeZoneInfo.Local.GetUtcOffset(dateTime.DateTime)))
+                return DateTime.SpecifyKind(dateTime.DateTime, DateTimeKind.Local);
+            else
+                return dateTime.DateTime;
+        }
     }
 }

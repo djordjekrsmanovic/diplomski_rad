@@ -7,7 +7,7 @@ export class Alert{
         public severity:string='',
         public status:string='',
         public category:string='',
-        public createDateTime:Date=new Date(),
+        public createDateTime:string='',
         public assignedTo:string='',
         public provider:string=''
     ){

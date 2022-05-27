@@ -18,7 +18,7 @@ namespace MicrosoftGraphSecurityApi.Mapper
             alertTableDto.Status = model.Status.Value;
             alertTableDto.Severity = model.Severity.Value;
             alertTableDto.Provider = model.VendorInformation.Provider;
-            alertTableDto.CreateDateTime = model.CreatedDateTime.Value;
+            alertTableDto.CreateDateTime = Alert.ConvertFromDateTimeOffset(model.CreatedDateTime.Value).ToString("dd/MM/yyyy");
             alertTableDto.AssignedTo = model.AssignedTo;
             alertTableDto.Category = model.Category.Substring(model.Category.IndexOf("_")+1);
             return alertTableDto;

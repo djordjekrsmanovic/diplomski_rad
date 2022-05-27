@@ -23,7 +23,7 @@ namespace MicrosoftGraphSecurityApi.Mapper
             detailsDto.AlertDescription = model.Description;
             detailsDto.AssignedTo = model.AssignedTo;
             detailsDto.Category = model.Category;
-            detailsDto.CreateDateTime = model.CreatedDateTime.Value;
+            detailsDto.CreateDateTime = Alert.ConvertFromDateTimeOffset(model.CreatedDateTime.Value).ToString("dd/MM/yyyy h:mm tt");
             detailsDto.Id = model.Id;
             detailsDto.recommendedActions = model.RecommendedActions;
             detailsDto.Severity = model.Severity.Value;
