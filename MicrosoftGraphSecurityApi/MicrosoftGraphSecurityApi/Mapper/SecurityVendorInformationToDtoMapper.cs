@@ -1,9 +1,6 @@
 ﻿using Microsoft.Graph;
 using MicrosoftGraphSecurityApi.Dto;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace MicrosoftGraphSecurityApi.Mapper
 {

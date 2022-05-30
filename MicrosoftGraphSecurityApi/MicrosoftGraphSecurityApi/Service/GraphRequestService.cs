@@ -1,9 +1,6 @@
 ﻿using MicrosoftGraphSecurityApi.Authentication;
-using MicrosoftGraphSecurityApi.Model;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -27,7 +24,6 @@ namespace MicrosoftGraphSecurityApi.Service
         public async Task<String> CreateRequest(String url,String content="")
         {
             var token = await this.authenticationProvider.GetAccessToken();
-
 
             string graphUrl = string.Format(urlBase+url);
 

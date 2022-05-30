@@ -5,8 +5,6 @@ namespace MicrosoftGraphSecurityApi.Model
 {
     public class AlertFilterComponent
     {
-        
-
         public AlertFilterComponent(AlertFilterComponentType type, string value)
         {
             FilterType = type;
@@ -28,22 +26,4 @@ namespace MicrosoftGraphSecurityApi.Model
 
         }
     }
-
-   /* public enum FilterServerityValues
-    {
-        ANY,
-        HIGH,
-        MEDIUM,
-        LOW,
-        INFORMATIONAL
-    }
-
-    public enum FilterCategoryValues
-    {
-        ANY,
-        NEW_ALERT,
-        IN_PRORESS,
-        RESOLVED,
-        DISMISSED
-    }*/
 }

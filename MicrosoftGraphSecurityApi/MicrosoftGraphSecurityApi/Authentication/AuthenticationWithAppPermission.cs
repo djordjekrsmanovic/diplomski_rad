@@ -1,7 +1,5 @@
 ﻿using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace MicrosoftGraphSecurityApi.Authentication
@@ -34,7 +32,7 @@ namespace MicrosoftGraphSecurityApi.Authentication
             }
             catch (Exception ex)
             {
-                throw new Exception("Error Acquiring Access Token: \n" + ex.Message);
+                throw new Exception("Authentication error \n" + ex.Message);
             }
 
         }

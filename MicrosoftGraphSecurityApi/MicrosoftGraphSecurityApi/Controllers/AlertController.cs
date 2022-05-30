@@ -1,21 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using Microsoft.IdentityModel.Clients.ActiveDirectory;
-using MicrosoftGraphSecurityApi.Authentication;
-using MicrosoftGraphSecurityApi.Model;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Configuration.Json;
 using MicrosoftGraphSecurityApi.Dto;
 using MicrosoftGraphSecurityApi.Mapper;
+using MicrosoftGraphSecurityApi.Model;
 using MicrosoftGraphSecurityApi.Service;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace MicrosoftGraphSecurityApi.Controllers
 {
@@ -46,7 +36,7 @@ namespace MicrosoftGraphSecurityApi.Controllers
         public async Task<List<AlertTableDto>> GetAlerts()
         {
 
-            List<Alert> alerts = alertService.getAlerts().Result;
+            List<Alert> alerts = alertService.GetAlerts().Result;
 
             List<AlertTableDto> alertTableDtos = alertToAlertTableDtoMapper.ToDtoList(alerts);
 
@@ -57,7 +47,7 @@ namespace MicrosoftGraphSecurityApi.Controllers
         [Route("/alerts/{alertId}")]
         public async Task<AlertDetailsDto> GetAlert(String alertId)
         {
-            Alert alert = alertService.getAlert(alertId).Result;
+            Alert alert = alertService.GetAlert(alertId).Result;
 
             AlertDetailsDto alertDetailsDto = alertToAlertDetailsDtoMapper.ToDto(alert);
 

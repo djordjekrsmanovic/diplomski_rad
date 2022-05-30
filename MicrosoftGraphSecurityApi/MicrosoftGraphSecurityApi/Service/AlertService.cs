@@ -3,7 +3,6 @@ using MicrosoftGraphSecurityApi.Model;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace MicrosoftGraphSecurityApi.Service
@@ -17,7 +16,7 @@ namespace MicrosoftGraphSecurityApi.Service
             this.graphRequestService = graphRequestService;
         }
 
-        public async Task<Alert> getAlert(string alertId)
+        public async Task<Alert> GetAlert(string alertId)
         {
             String json = await graphRequestService.CreateRequest("alerts/" + alertId);
 
@@ -26,7 +25,7 @@ namespace MicrosoftGraphSecurityApi.Service
             return alert;
         }
 
-        public async Task<List<Alert>> getAlerts()
+        public async Task<List<Alert>> GetAlerts()
         {
             String json = await graphRequestService.CreateRequest("alerts?$filter=(Status eq 'NewAlert') and (Severity eq 'High' or Severity eq 'Low')");
 
