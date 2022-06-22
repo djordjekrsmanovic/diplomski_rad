@@ -1,0 +1,25 @@
+<app-loader *ngIf="!dataLoaded"></app-loader>
+<div class="columns" *ngIf="dataLoaded">
+    <div class="column is-6">
+        
+        <div class="box">
+            <article class="tile is-child notification is-primary">
+                <p class="title">Alert Statistics</p>
+                <p class="subtitle">By Status</p>
+            </article>
+            <ngx-charts-advanced-pie-chart  [gradient]="true" [results]="statusStatistic" [view]="[700,400]">
+            </ngx-charts-advanced-pie-chart>
+        </div>
+    </div>
+    <div class="column is-6">
+
+        <div class="box">
+            <article class="tile is-child notification is-primary">
+                <p class="title">Alert Statistics</p>
+                <p class="subtitle">By Severity</p>
+            </article>
+            <ngx-charts-advanced-pie-chart [customColors]="colorScheme"  [results]="severityStatistic" [view]="[700,400]">
+            </ngx-charts-advanced-pie-chart>
+        </div>
+    </div>
+</div>

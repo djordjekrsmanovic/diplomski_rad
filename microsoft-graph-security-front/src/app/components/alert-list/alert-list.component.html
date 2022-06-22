@@ -1,0 +1,167 @@
+<app-loader *ngIf="!dataLoaded"></app-loader>
+<div class="alerts" *ngIf="dataLoaded">
+    <div class="content is-medium">
+        <div class="columns">
+            <div class="column is-10">
+                <h1 class="title">Alerts</h1>
+                <hr />
+                <app-loader *ngIf="filteringData"></app-loader>
+                <table class="table is-striped" *ngIf="!filteringData">
+                    <thead>
+                        <tr>
+
+                            <th><abbr title="Title">Title</abbr></th>
+                            <th><abbr title="Sevarity">Servarity</abbr></th>
+                            <th><abbr title="Status">Status</abbr></th>
+                            <th><abbr title="Category">Category</abbr></th>
+                            <th><abbr title="Created Date">Created Date</abbr></th>
+                            <th><abbr title="Provider">Provider</abbr></th>
+
+                        </tr>
+                    </thead>
+
+                    <tbody class="filter-content">
+                        <tr *ngFor="let alert of alerts" (click)="rowClicked(alert)">
+
+                            <td>{{alert.title}}</td>
+                            <td>{{alert.severity}}</td>
+                            <td>{{alert.status}}</td>
+                            <td>{{alert.category}}</td>
+                            <td>{{alert.createDateTime}}</td>
+                            <td>{{alert.provider}}</td>
+                        </tr>
+                    </tbody>
+
+
+                </table>
+            </div>
+            <div class="column is-2">
+                <div style="margin-left: 5px; background-color: rgb(203, 210, 219); float:right; position: fixed">
+                    <div>
+                        <h3>Filters</h3>
+                    </div>
+                    <hr />
+                    <div class="filter-content">
+                        <div class="filters">
+                            <div class="columns">
+                                <div class="column">
+                                    Top
+                                </div>
+                                <div class="column">
+                                    <input class="input is-info" [(ngModel)]="alertCount" type="text"
+                                        placeholder="Insert number of visible alerts">
+                                </div>
+
+                            </div>
+                            <hr />
+                            <div class="columns">
+                                <div class="column">
+                                    <b>Severity</b>
+                                </div>
+
+
+                            </div>
+
+                            <div class="columns">
+                                <div class="column">
+                                    <label class="checkbox">
+                                        <input type="checkbox" (click)="addSeverity('High')">
+                                        High
+                                    </label>
+                                </div>
+
+                            </div>
+
+                            <div class="columns">
+                                <div class="column">
+                                    <label class="checkbox">
+                                        <input type="checkbox" (click)="addSeverity('Medium')">
+                                        Medium
+                                    </label>
+                                </div>
+
+                            </div>
+
+                            <div class="columns">
+                                <div class="column">
+                                    <label class="checkbox">
+                                        <input type="checkbox" (click)="addSeverity('Low')">
+                                        Low
+                                    </label>
+                                </div>
+
+                            </div>
+
+                            <div class="columns">
+                                <div class="column">
+                                    <label class="checkbox">
+                                        <input type="checkbox" (click)="addSeverity('Informational')">
+                                        Informational
+                                    </label>
+                                </div>
+
+                            </div>
+                            <hr />
+
+                            <div class="columns">
+                                <div class="column">
+                                    <b>Status</b>
+                                </div>
+
+
+                            </div>
+
+                            <div class="columns">
+                                <div class="column">
+                                    <label class="checkbox">
+                                        <input type="checkbox" (click)="addStatus('NewAlert')">
+                                        NewAlert
+                                    </label>
+                                </div>
+
+                            </div>
+
+                            <div class="columns">
+                                <div class="column">
+                                    <label class="checkbox">
+                                        <input type="checkbox" (click)="addStatus('InProgress')">
+                                        InProress
+                                    </label>
+                                </div>
+
+                            </div>
+
+                            <div class="columns">
+                                <div class="column">
+                                    <label class="checkbox">
+                                        <input type="checkbox" (click)="addStatus('Resolved')">
+                                        Resolved
+                                    </label>
+                                </div>
+
+                            </div>
+
+                            <div class="columns">
+                                <div class="column">
+                                    <label class="checkbox">
+                                        <input type="checkbox" (click)="addStatus('Dismissed')">
+                                        Dismissed
+                                    </label>
+                                </div>
+
+                            </div>
+                            <hr />
+                            <div class="columns">
+                                <div class="column">
+                                    <button class="button is-info" (click)="filterAlerts()">Apply Filters</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div>
+    </div>

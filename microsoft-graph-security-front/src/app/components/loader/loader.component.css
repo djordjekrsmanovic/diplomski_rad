@@ -1,0 +1,24 @@
+.loader-container {
+    width: 100%;
+    min-height: calc(100vh + 12px);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    background-image: linear-gradient(
+      rgba(255, 255, 255, 0.7),
+      rgba(255, 255, 255, 0.6),
+      rgba(255, 255, 255, 0.4),
+      rgba(59, 59, 59, 0)
+    );
+  }
+  
+  p {
+    font-weight: 900;
+  }
+  
+  .loader-content {
+    margin: auto;
+    height: 100%;
+    width: 100%;
+  }
